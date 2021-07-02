@@ -8,6 +8,6 @@ namespace DVDMovie.Models{
         public string Description { get; set; }
         public decimal Price { get; set; }
         public Studio Studio { get; set; }
-        public List<Rating> Ratings { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
     }
 }

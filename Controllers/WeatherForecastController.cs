@@ -4,14 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using DVDMovie.Models;
+
 
 namespace DVDMovie.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private DataContext dataContext;
+
+        public WeatherForecastController(DataContext dataContext)
+        {
+            this.dataContext = dataContext;
+        }
+
+        [HttpGet("[action]")]
+        public Movie GetMovie()
+        {
+            return dataContext.Movies.OrderBy(m => m.MovieId).First();
+        }
+
+        /* private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
@@ -34,6 +49,6 @@ namespace DVDMovie.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-        }
+        } */
     }
 }
