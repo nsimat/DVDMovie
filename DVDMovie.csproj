@@ -21,13 +21,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
-<<<<<<< HEAD
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-=======
->>>>>>> 6465d08a6fbe9f1e4a96ac28252af941c9fbf69e
   </ItemGroup>
 
   <ItemGroup>
