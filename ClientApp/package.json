@@ -36,7 +36,11 @@
     "@angular-devkit/build-angular": "^12.1.1",
     "@angular/cli": "^12.1.1",
     "@angular/compiler-cli": "^12.1.1",
+<<<<<<< HEAD
     "@angular/language-service": "^12.1.1",
+=======
+    "@angular/language-service": "^8.2.14",
+>>>>>>> b4a89da3ef2048206a9668cb7e530cdbc4379174
     "@types/jasmine": "~3.4.4",
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "~12.11.6",
