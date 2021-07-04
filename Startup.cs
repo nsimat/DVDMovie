@@ -22,9 +22,13 @@ namespace DVDMovie
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => 
+            services.AddDbContext<DataContext>(options =>
                                             options.UseSqlServer(Configuration["ConnectionStrings:Movies"]));
+
+            services.AddMvc().AddJsonOptions(options => 
+            {});
             services.AddControllersWithViews();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
