@@ -11,11 +11,11 @@ namespace DVDMovie.Controllers
 {
     [ApiController]
     [Route("api/movies")]
-    public class MovieController : ControllerBase
+    public class MoviesController : ControllerBase
     {
         private DataContext dataContext;
 
-        public MovieController(DataContext dataContext)
+        public MoviesController(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
@@ -52,6 +52,31 @@ namespace DVDMovie.Controllers
                 }
             }
             return result;
+        }
+
+        [HttpGet]
+        public IEnumerable<Movie> GetMovies(bool related = false) 
+        {
+            IQueryable<Movie> query = dataContext.Movies;
+            if(related)
+            {
+                query = query.Include(m => m.Studio).Include(m => m.Ratings);
+                List<Movie> data = query.ToList();
+                data.ForEach(m => 
+                {
+                    if(m.Studio != null)
+                    {
+                        m.Studio.Movies = null;
+                    }
+                    if(m.Ratings != null)
+                    {
+                        m.Ratings.ToList().ForEach(r => r.Movie = null);
+                        
+                    }
+                });
+                return data;
+            }           
+            return query;
         }
     }
 }

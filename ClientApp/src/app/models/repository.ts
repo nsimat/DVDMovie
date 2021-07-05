@@ -1,23 +1,25 @@
 import { Movie } from "./movie.model";
 import { HttpClient } from "@angular/common/http";
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 const moviesUrl = "/api/movies";
 @Injectable()
 export class Repository {
-  public movie: Movie;
-  constructor(private http: HttpClient, @Inject("BASE_URL") baseUrl: string) {
-    http.get<Movie>(baseUrl + "api/movies/3").subscribe(
-      (result) => {
-        this.movie = result;
-      },
-      (error) => console.error(error)
-    );
-    this.getMovie(3);
+
+  constructor(private http: HttpClient) {
+    this.getMovies(true);
   }
 
   getMovie(id: number) {
     this.http.get(moviesUrl + "/" + id)
              .subscribe(response => { this.movie = response });
   }
+
+  getMovies(related = false){
+    this.http.get<Movie[]>(moviesUrl + "?related=" + related)
+             .subscribe(response => this.movies = response);
+  }
+
+  movie: Movie;
+  movies: Movie[];
 }
