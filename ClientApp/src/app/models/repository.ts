@@ -17,7 +17,6 @@ export class Repository {
   }
 
   getMovie(id: number) {
-    // console.log("Movie Data Requested.");
     this.http.get(moviesUrl + "/" + id)
              .subscribe(response => { this.movie = response });
   }
