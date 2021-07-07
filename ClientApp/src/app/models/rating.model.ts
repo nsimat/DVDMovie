@@ -1,9 +1,9 @@
-import { Movie } from "./movie.model";
+import { Movie } from './movie.model';
 
-export class Rating{
+export class Rating {
   constructor(
     public ratingId?: number,
     public stars?: string,
     public movie?: Movie
-  ){}
+  ) {}
 }
