@@ -1,11 +1,11 @@
-import { Movie } from "./movie.model";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Filter } from "./configClasses.repository";
-import { Studio } from "./studio.model";
+import { Movie } from './movie.model';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Filter } from './configClasses.repository';
+import { Studio } from './studio.model';
 
-const studiosUrl = "/api/studios";
-const moviesUrl = "/api/movies";
+const studiosUrl = '/api/studios';
+const moviesUrl = '/api/movies';
 @Injectable()
 export class Repository {
   private filterObject = new Filter();
@@ -19,18 +19,18 @@ export class Repository {
   }
 
   getMovie(id: number) {
-    this.http.get(moviesUrl + "/" + id).subscribe((response) => {
+    this.http.get(moviesUrl + '/' + id).subscribe((response) => {
       this.movie = response;
     });
   }
 
   getMovies(related = false) {
-    let url = moviesUrl + "?related=" + this.filter.related;
+    let url = moviesUrl + '?related=' + this.filter.related;
     if (this.filter.category) {
-      url += "&category=" + this.filter.category;
+      url += '&category=' + this.filter.category;
     }
     if (this.filter.search) {
-      url += "&search=" + this.filter.search;
+      url += '&search=' + this.filter.search;
     }
 
     this.http

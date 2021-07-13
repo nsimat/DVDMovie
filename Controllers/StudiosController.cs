@@ -20,14 +20,29 @@ namespace DVDMovie.Controllers
             return dataContext.Studios;
         }
 
-        public IActionResult CreateStudio([FromBody] StudioData stdata)
+        [HttpPost]
+        public IActionResult CreateStudio([FromBody] StudioData stData)
         {
             if(ModelState.IsValid)
             {
-                Studio studio = stdata.Studio;
+                Studio studio = stData.Studio;
                 dataContext.Add(studio);
                 dataContext.SaveChanges();
                 return Ok(studio.StudioId);
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost("{id}")]
+        public IActionResult ReplaceStudio(long id, [FromBody] StudioData stData)
+        {
+            if(ModelState.IsValid)
+            {
+                Studio studio = stData.Studio;
+                studio.StudioId = id;
+                dataContext.Update(studio);
+                dataContext.SaveChanges();
+                return Ok();
             }
             return BadRequest(ModelState);
         }

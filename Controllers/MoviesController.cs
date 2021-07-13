@@ -96,11 +96,12 @@ namespace DVDMovie.Controllers
             return query;
         }
 
-        public IActionResult CreateMovie([FromBody] MovieData mdata) 
+        [HttpPost]
+        public IActionResult CreateMovie([FromBody] MovieData mData) 
         {
             if(ModelState.IsValid) 
             {
-                Movie movie = mdata.Movie;
+                Movie movie = mData.Movie;
                 if(movie.Studio != null && movie.Studio.StudioId != 0)
                 {
                     dataContext.Attach(movie);
@@ -108,6 +109,25 @@ namespace DVDMovie.Controllers
                 dataContext.Add(movie);
                 dataContext.SaveChanges();
                 return Ok(movie.MovieId);
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult ReplaceMovie(long id, [FromBody] MovieData mData) 
+        {
+            if(ModelState.IsValid) 
+            {
+                Movie movie = mData.Movie;
+                movie.MovieId = id;
+
+                if(movie.Studio != null && movie.Studio.StudioId != 0)
+                {
+                    dataContext.Attach(movie);
+                }
+                dataContext.Update(movie);
+                dataContext.SaveChanges();
+                return Ok();
             }
             return BadRequest(ModelState);
         }

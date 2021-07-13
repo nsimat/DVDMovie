@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Repository } from "./models/repository";
-import { Movie } from "./models/movie.model";
+import { Repository } from './models/repository';
+import { Movie } from './models/movie.model';
 import { Studio } from './models/studio.model';
 
 @Component({
@@ -19,12 +19,12 @@ export class AppComponent {
   }
 
   createMovie() {
-    this.repo.createMovie(new Movie(0,"bit.ly/2D8C6ha",
-                                      "X-Men Apocalypse",
-                                      "Drama",
-                                      "After the re-emergence of the world's first mutant, " +
-                                      "the world-destroyer Apocalypse, the X-Men must unite to defeat his " +
-                                      "extinction level plan.",
+    this.repo.createMovie(new Movie(0,'bit.ly/2D8C6ha',
+                                      'X-Men Apocalypse',
+                                      'Drama',
+                                      'After the re-emergence of the world\'s first mutant, ' +
+                                      'the world-destroyer Apocalypse, the X-Men must unite to defeat his ' +
+                                      'extinction level plan.',
                                       49.99,
                                       this.repo.movies[0].studio
                                     )
@@ -32,11 +32,11 @@ export class AppComponent {
   }
 
   createMovieAndStudio() {
-    let stud = new Studio(0, "SkyTaylor Films", "Brooklyn", "NY");
-    let mov = new Movie(0, "bit.ly/2D7Vtqo",
-                           "Chef",
-                           "Romance",
-                           "A head chef quits his restaurant job and buys a food truck",
+    let stud = new Studio(0, 'SkyTaylor Films', 'Brooklyn', 'NY');
+    let mov = new Movie(0, 'bit.ly/2D7Vtqo',
+                           'Chef',
+                           'Romance',
+                           'A head chef quits his restaurant job and buys a food truck',
                            100,
                            stud
                        );
