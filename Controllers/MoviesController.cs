@@ -8,6 +8,10 @@ using DVDMovie.Models;
 using Microsoft.EntityFrameworkCore;
 using DVDMovie.Controllers.BindingTargets;
 using Microsoft.AspNetCore.JsonPatch;
+using System.Text.Json;
+using System.Reflection;
+using System.ComponentModel;
+
 
 namespace DVDMovie.Controllers
 {
@@ -138,7 +142,7 @@ namespace DVDMovie.Controllers
         {
             Movie movie = dataContext.Movies
                                      .Include(m => m.Studio)
-                                     .FirstOrDefault(m => m.MovieId == id);
+                                     .First(m => m.MovieId == id);
 
             MovieData mData = new MovieData { Movie = movie };
             patch.ApplyTo(mData, ModelState);

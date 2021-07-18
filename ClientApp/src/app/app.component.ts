@@ -56,7 +56,7 @@ export class AppComponent {
   }
 
   replaceStudio() {
-    let std = new Studio(6, "Modified Studio", "Brooklyn", "NY");
+    let std = new Studio(1, "Modified Studio", "Brooklyn", "NY");
     this.repo.replaceStudio(std);
   }
 

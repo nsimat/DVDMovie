@@ -13,7 +13,6 @@ export class Repository {
   movies: Movie[];
   studios: Studio[] = [];
   constructor(private http: HttpClient) {
-    // this.filter.category = 'drama';
     this.filter.related = true;
     this.getMovies(true);
   }
@@ -35,7 +34,7 @@ export class Repository {
 
     this.http
       .get<Movie[]>(url)
-      .subscribe((response) => (this.movies = response));
+      .subscribe( response => this.movies = response );
   }
 
   getStudios() {
