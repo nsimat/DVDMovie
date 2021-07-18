@@ -33,7 +33,7 @@ namespace DVDMovie.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpPost("{id}")]
+        [HttpPut("{id}")]
         public IActionResult ReplaceStudio(long id, [FromBody] StudioData stData)
         {
             if(ModelState.IsValid)

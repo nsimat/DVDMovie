@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using DVDMovie.Models;
 using Microsoft.EntityFrameworkCore;
 using DVDMovie.Controllers.BindingTargets;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace DVDMovie.Controllers
 {
@@ -71,7 +72,7 @@ namespace DVDMovie.Controllers
             if (!string.IsNullOrWhiteSpace(search))
             {
                 string searchLower = search.ToLower();
-                query = query.Where(m => m.Name.ToLower().Contains(searchLower) 
+                query = query.Where(m => m.Name.ToLower().Contains(searchLower)
                                     || m.Description.ToLower().Contains(searchLower));
             }
 
@@ -97,12 +98,12 @@ namespace DVDMovie.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateMovie([FromBody] MovieData mData) 
+        public IActionResult CreateMovie([FromBody] MovieData mData)
         {
-            if(ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 Movie movie = mData.Movie;
-                if(movie.Studio != null && movie.Studio.StudioId != 0)
+                if (movie.Studio != null && movie.Studio.StudioId != 0)
                 {
                     dataContext.Attach(movie);
                 }
@@ -114,20 +115,42 @@ namespace DVDMovie.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult ReplaceMovie(long id, [FromBody] MovieData mData) 
+        public IActionResult ReplaceMovie(long id, [FromBody] MovieData mData)
         {
-            if(ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 Movie movie = mData.Movie;
                 movie.MovieId = id;
 
-                if(movie.Studio != null && movie.Studio.StudioId != 0)
+                if (movie.Studio != null && movie.Studio.StudioId != 0)
                 {
                     dataContext.Attach(movie);
                 }
                 dataContext.Update(movie);
                 dataContext.SaveChanges();
                 return Ok();
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult UpdateMovie(long id, [FromBody] JsonPatchDocument<MovieData> patch)
+        {
+            Movie movie = dataContext.Movies
+                                     .Include(m => m.Studio)
+                                     .FirstOrDefault(m => m.MovieId == id);
+
+            MovieData mData = new MovieData { Movie = movie };
+            patch.ApplyTo(mData, ModelState);
+            
+            if(ModelState.IsValid && TryValidateModel(mData))
+            {
+                if(movie.Studio != null && movie.Studio.StudioId != 0)
+                {
+                    dataContext.Attach(movie.Studio);
+                }
+                dataContext.SaveChanges();
+                return Ok(movie);
             }
             return BadRequest(ModelState);
         }

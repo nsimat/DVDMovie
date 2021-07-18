@@ -1,11 +1,11 @@
-import { Movie } from './movie.model';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Filter } from './configClasses.repository';
-import { Studio } from './studio.model';
+import { Movie } from "./movie.model";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Filter } from "./configClasses.repository";
+import { Studio } from "./studio.model";
 
-const studiosUrl = '/api/studios';
-const moviesUrl = '/api/movies';
+const studiosUrl = "/api/studios";
+const moviesUrl = "/api/movies";
 @Injectable()
 export class Repository {
   private filterObject = new Filter();
@@ -19,18 +19,18 @@ export class Repository {
   }
 
   getMovie(id: number) {
-    this.http.get(moviesUrl + '/' + id).subscribe((response) => {
+    this.http.get(moviesUrl + "/" + id).subscribe((response) => {
       this.movie = response;
     });
   }
 
   getMovies(related = false) {
-    let url = moviesUrl + '?related=' + this.filter.related;
+    let url = moviesUrl + "?related=" + this.filter.related;
     if (this.filter.category) {
-      url += '&category=' + this.filter.category;
+      url += "&category=" + this.filter.category;
     }
     if (this.filter.search) {
-      url += '&search=' + this.filter.search;
+      url += "&search=" + this.filter.search;
     }
 
     this.http
@@ -51,7 +51,7 @@ export class Repository {
       category: mov.category,
       description: mov.description,
       price: mov.price,
-      studio: mov.studio ? mov.studio.studioId : 0
+      studio: mov.studio ? mov.studio.studioId : 0,
     };
     this.http.post<number>(moviesUrl, data).subscribe((response) => {
       mov.movieId = response;
@@ -63,7 +63,7 @@ export class Repository {
     let data = {
       name: stu.name,
       city: stu.city,
-      state: stu.state
+      state: stu.state,
     };
     this.http.post<number>(studiosUrl, data).subscribe((response) => {
       stu.studioId = response;
@@ -73,6 +73,41 @@ export class Repository {
         this.createMovie(mov);
       }
     });
+  }
+
+  replaceMovie(mov: Movie) {
+    let data = {
+      image: mov.image,
+      name: mov.name,
+      category: mov.category,
+      description: mov.description,
+      price: mov.price,
+      studio: mov.studio ? mov.studio.studioId : 0,
+    };
+    this.http
+      .put(moviesUrl + '/' + mov.movieId, data)
+      .subscribe( response  => this.getMovies() );
+  }
+
+  replaceStudio(stud: Studio) {
+    let data = {
+      name: stud.name,
+      city: stud.city,
+      state: stud.state,
+    };
+    this.http
+      .put(studiosUrl + '/' + stud.studioId, data)
+      .subscribe((response) => this.getMovies());
+  }
+
+  updateMovie(id: number, changes: Map<string, any>) {
+    let patch = [];
+    changes.forEach((value, key) =>
+      patch.push({ op: 'replace', path: key, value: value })
+    );
+    this.http
+      .patch(moviesUrl + '/' + id, patch)
+      .subscribe( response => this.getMovies() );
   }
 
   get filter(): Filter {

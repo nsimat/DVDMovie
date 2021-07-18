@@ -2,7 +2,7 @@ import { Studio } from './studio.model';
 import { Rating } from './rating.model';
 
 export class Movie {
-  constructor(
+  constructor (
     public movieId?: number,
     public image?: string,
     public name?: string,
