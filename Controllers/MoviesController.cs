@@ -146,10 +146,10 @@ namespace DVDMovie.Controllers
 
             MovieData mData = new MovieData { Movie = movie };
             patch.ApplyTo(mData, ModelState);
-            
-            if(ModelState.IsValid && TryValidateModel(mData))
+
+            if (ModelState.IsValid && TryValidateModel(mData))
             {
-                if(movie.Studio != null && movie.Studio.StudioId != 0)
+                if (movie.Studio != null && movie.Studio.StudioId != 0)
                 {
                     dataContext.Attach(movie.Studio);
                 }
@@ -157,6 +157,14 @@ namespace DVDMovie.Controllers
                 return Ok(movie);
             }
             return BadRequest(ModelState);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteMovie(long id)
+        {
+            dataContext.Movies.Remove(new Movie { MovieId = id });
+            dataContext.SaveChanges();
+            return Ok(id);
         }
     }
 }
