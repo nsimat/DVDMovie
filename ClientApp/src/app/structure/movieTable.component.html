@@ -1,12 +1,16 @@
 <table class="table table-striped">
-  <tr>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Price</th>
-  </tr>
-  <tr *ngFor="let movie of movies">
-    <td>{{ movie.name }}</td>
-    <td>{{ movie.category }}</td>
-    <td>{{ movie.price }}</td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let movie of movies">
+      <td>{{ movie.name }}</td>
+      <td>{{ movie.category }}</td>
+      <td>{{ movie.price | currency: "EUR":symbol }}</td>
+    </tr>
+  </tbody>
 </table>
