@@ -62,8 +62,16 @@ export class AppComponent {
 
   updateMovie() {
     let changes = new Map<string, any>();
-    changes.set('name', 'Green Hornet');
-    changes.set('studio', null);
+    changes.set("name", "Green Hornet");
+    changes.set("studio", null);
     this.repo.updateMovie(11, changes);
+  }
+
+  deleteMovie() {
+    this.repo.deleteMovie(1);
+  }
+
+  deleteStudio() {
+    this.repo.deleteStudio(2);
   }
 }
