@@ -4,6 +4,7 @@
       <th>Name</th>
       <th>Category</th>
       <th>Price</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -11,6 +12,14 @@
       <td>{{ movie.name }}</td>
       <td>{{ movie.category }}</td>
       <td>{{ movie.price | currency: "EUR":symbol }}</td>
+      <td>
+        <button
+          class="btn btn-primary btn-sm"
+          (click)="selectedMovie(movie.movieId)"
+        >
+          Details
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

@@ -8,10 +8,12 @@ const studiosUrl = "/api/studios";
 const moviesUrl = "/api/movies";
 @Injectable()
 export class Repository {
+  
   private filterObject = new Filter();
   movie: Movie;
   movies: Movie[];
   studios: Studio[] = [];
+
   constructor(private http: HttpClient) {
     this.filter.related = true;
     this.getMovies(true);
