@@ -8,6 +8,7 @@ import { ModelModule} from './models/model.module';
 import {MovieTableComponent} from './structure/movieTable.component';
 import {CategoryFilterComponent} from './structure/categoryFilter.component';
 import { MovieDetailComponent } from './structure/movieDetail.component';
+import { RoutingConfig} from './app.routing';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MovieDetailComponent } from './structure/movieDetail.component';
     MovieDetailComponent
   ],
   imports: [
+    RoutingConfig,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     ModelModule,
