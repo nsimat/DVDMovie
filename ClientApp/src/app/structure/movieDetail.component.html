@@ -17,7 +17,7 @@
     </tr>
     <tr>
       <th>Price</th>
-      <td>{{ movie?.price | currency: "EUR" || 'No Data' }}</td>
+      <td>{{ movie?.price | currency: "EUR": 'symbol' || 'No Data' }}</td>
     </tr>
     <tr>
       <th colspan="2" class="bg-info">Studio</th>
@@ -40,3 +40,6 @@
     </tr>
   </tbody>
 </table>
+<div class="text-center">
+  <button class="btn btn-primary btn-sm" routerLink="/table">Back</button>
+</div>
