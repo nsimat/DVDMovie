@@ -61,9 +61,10 @@ namespace DVDMovie.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Movie> GetMovies(string category,
+        public IActionResult GetMovies(string category,
                                             string search,
-                                            bool related = false)
+                                            bool related = false, 
+                                            bool metadata = false)
         {
             IQueryable<Movie> query = dataContext.Movies;
 
@@ -96,9 +97,18 @@ namespace DVDMovie.Controllers
 
                     }
                 });
-                return data;
+                return metadata ? CreateMetadata(data) : Ok(data);
             }
-            return query;
+            return metadata ? CreateMetadata(query) : Ok(query);
+        }
+
+        private OkObjectResult CreateMetadata(IEnumerable<Movie> movies)
+        {
+            return Ok(new {
+                data = movies,
+                categories = dataContext.Movies.Select(m => m.Category)
+                                               .Distinct().OrderBy(c => c)
+            });
         }
 
         [HttpPost]
