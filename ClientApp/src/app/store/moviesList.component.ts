@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { Repository } from '../models/repository';
-import { Movie } from '../models/movie.model';
+import { Component } from "@angular/core";
+import { Repository } from "../models/repository";
+import { Movie } from "../models/movie.model";
 
 @Component({
   selector: "store-movies-list",
-  templateUrl: "moviesList.component.html"
+  templateUrl: "moviesList.component.html",
 })
-export class MoviesListComponent{
-  constructor(private repo: Repository){}
+export class MoviesListComponent {
+  constructor(private repo: Repository) {}
 
-  get movies(): Movie[]{
+  get movies(): Movie[] {
     return this.repo.movies;
   }
 }

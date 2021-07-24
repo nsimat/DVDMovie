@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: "store-cartsummary",
   templateUrl: "cartSummary.component.html"
 })
-export class CartSummary{
+export class CartSummaryComponent{
 
 }
