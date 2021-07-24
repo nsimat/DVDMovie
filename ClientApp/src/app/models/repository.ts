@@ -6,13 +6,15 @@ import { Studio } from "./studio.model";
 
 const studiosUrl = "/api/studios";
 const moviesUrl = "/api/movies";
+
 @Injectable()
 export class Repository {
-  
+
   private filterObject = new Filter();
   movie: Movie;
   movies: Movie[];
   studios: Studio[] = [];
+  categories: string[] = [];
 
   constructor(private http: HttpClient) {
     this.filter.related = true;
@@ -34,9 +36,14 @@ export class Repository {
       url += "&search=" + this.filter.search;
     }
 
+    url += "&metadata=true";
+
     this.http
-      .get<Movie[]>(url)
-      .subscribe((response) => (this.movies = response));
+      .get<any>(url)
+      .subscribe( response => {
+        this.movies = response.data;
+        this.categories = response.categories;
+      });
   }
 
   getStudios() {
