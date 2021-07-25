@@ -1,7 +1,7 @@
 import { Movie } from "./movie.model";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Filter } from "./configClasses.repository";
+import { Filter, Pagination } from "./configClasses.repository";
 import { Studio } from "./studio.model";
 
 const studiosUrl = "/api/studios";
@@ -11,6 +11,8 @@ const moviesUrl = "/api/movies";
 export class Repository {
 
   private filterObject = new Filter();
+  private paginationObject = new Pagination();
+
   movie: Movie;
   movies: Movie[];
   studios: Studio[] = [];
@@ -43,6 +45,7 @@ export class Repository {
       .subscribe( response => {
         this.movies = response.data;
         this.categories = response.categories;
+        this.pagination.currentPage = 1;
       });
   }
 
@@ -133,5 +136,9 @@ export class Repository {
 
   get filter(): Filter {
     return this.filterObject;
+  }
+
+  get pagination(): Pagination {
+    return this.paginationObject;
   }
 }
