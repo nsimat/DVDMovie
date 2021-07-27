@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ModelModule } from './models/model.module';
 import { RoutingConfig } from './app.routing';
 import { StoreModule } from './store/store.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { StoreModule } from './store/store.module';
     HttpClientModule,
     ModelModule,
     FormsModule,
+    FontAwesomeModule,
     StoreModule
   ],
   providers: [],

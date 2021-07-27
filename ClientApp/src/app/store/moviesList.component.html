@@ -4,6 +4,7 @@
       <span class="h4">
         <img src="https://{{movie.image}}" alt="[Image missing]" width="70px">
         {{movie.name}}
+        <store-ratings [movie]="movie"></store-ratings>
       </span>
       <span class="float-end badge rounded-pill bg-primary">
         {{movie.price | currency:"EUR":"symbol"}}
