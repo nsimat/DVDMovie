@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Movie } from "./movie.model";
+import { Repository } from "./repository";
 
 @Injectable()
 export class Cart {
@@ -8,9 +9,30 @@ export class Cart {
   itemCount: number = 0;
   totalPrice: number = 0;
 
+  // ---------Constructor---------------
+  constructor(private repo: Repository) {
+    repo.getSessionData("cart").subscribe((cartData) => {
+      if (cartData != null) {
+        cartData
+          .map(
+            (item) =>
+              new MovieSelection(
+                this,
+                item.movieId,
+                item.name,
+                item.price,
+                item.quantity
+              )
+          )
+          .forEach((item) => this.selections.push(item));
+        this.update(false);
+      }
+    });
+  }
+
   // ---------Methods-------------------
   addMovie(movie: Movie) {
-    let selection = this.selections.find((ms) => (ms.movieId == movie.movieId));
+    let selection = this.selections.find((ms) => ms.movieId == movie.movieId);
     if (selection) {
       selection.quantity++;
     } else {
@@ -41,13 +63,27 @@ export class Cart {
     this.update();
   }
 
-  update() {
+  update(storeData: boolean = true) {
     this.itemCount = this.selections
       .map((ms) => ms.quantity)
       .reduce((prev, curr) => prev + curr, 0);
     this.totalPrice = this.selections
       .map((ms) => ms.price * ms.quantity)
       .reduce((prev, curr) => prev + curr, 0);
+
+    if (storeData) {
+      this.repo.storeSessionData(
+        "cart",
+        this.selections.map(ms => {
+          return {
+            movieId: ms.movieId,
+            name: ms.name,
+            price: ms.price,
+            quantity: ms.quantity,
+          }
+        })
+      );
+    }
   }
 }
 
