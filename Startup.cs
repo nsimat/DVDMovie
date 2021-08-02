@@ -34,13 +34,28 @@ namespace DVDMovie
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
-            
+
             services.AddControllersWithViews();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            // Added for handling sessions
+            services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString = Configuration["ConnectionStrings:Movies"];
+                options.SchemaName = "dbo";
+                options.TableName = "SessionData";
+            });
+
+            // Added for handling sessions
+            services.AddSession(options => {
+                options.Cookie.Name = "DVDMovie.Session";
+                options.IdleTimeout = System.TimeSpan.FromHours(24);
+                options.Cookie.HttpOnly = false;
             });
         }
 
@@ -64,6 +79,8 @@ namespace DVDMovie
             {
                 app.UseSpaStaticFiles();
             }
+
+            app.UseSession();
 
             app.UseRouting();
 
