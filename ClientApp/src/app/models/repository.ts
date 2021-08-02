@@ -6,10 +6,10 @@ import { Studio } from "./studio.model";
 
 const studiosUrl = "/api/studios";
 const moviesUrl = "/api/movies";
+const sessionUrl = "/api/session";
 
 @Injectable()
 export class Repository {
-
   private filterObject = new Filter();
   private paginationObject = new Pagination();
 
@@ -40,13 +40,11 @@ export class Repository {
 
     url += "&metadata=true";
 
-    this.http
-      .get<any>(url)
-      .subscribe( response => {
-        this.movies = response.data;
-        this.categories = response.categories;
-        this.pagination.currentPage = 1;
-      });
+    this.http.get<any>(url).subscribe((response) => {
+      this.movies = response.data;
+      this.categories = response.categories;
+      this.pagination.currentPage = 1;
+    });
   }
 
   getStudios() {
@@ -140,5 +138,15 @@ export class Repository {
 
   get pagination(): Pagination {
     return this.paginationObject;
+  }
+
+  storeSessionData(dataType: string, data: any) {
+    return this.http
+      .post(sessionUrl + "/" + dataType, data)
+      .subscribe((reponse) => {});
+  }
+
+  getSessionData(dataType: string): any {
+    return this.http.get(sessionUrl + "/" + dataType);
   }
 }

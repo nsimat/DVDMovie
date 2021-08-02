@@ -1,7 +1,7 @@
 
 namespace DVDMovie.Models{
     
-    public class CartMovieSelection{
+    public class MovieSelection{
 
         public long movieId { get; set; }
         public string name { get; set; }
