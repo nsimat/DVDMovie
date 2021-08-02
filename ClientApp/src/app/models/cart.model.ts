@@ -10,7 +10,7 @@ export class Cart {
 
   // ---------Methods-------------------
   addMovie(movie: Movie) {
-    let selection = this.selections.find((ms) => (ms.movieId = movie.movieId));
+    let selection = this.selections.find((ms) => (ms.movieId == movie.movieId));
     if (selection) {
       selection.quantity++;
     } else {
@@ -25,14 +25,14 @@ export class Cart {
     if (quantity > 0) {
       let selection = this.selections.find((ms) => ms.movieId == movieId);
       if (selection) {
-        selection.quantity == quantity;
-      } else {
-        let index = this.selections.findIndex((ms) => ms.movieId == movieId);
-        if (index != -1) {
-          this.selections.splice(index, 1);
-        }
-        this.update();
+        selection.quantity = quantity;
       }
+    } else {
+      let index = this.selections.findIndex((ms) => ms.movieId == movieId);
+      if (index != -1) {
+        this.selections.splice(index, 1);
+      }
+      this.update();
     }
   }
 

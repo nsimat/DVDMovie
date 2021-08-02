@@ -13,15 +13,16 @@ export class MoviesListComponent {
   get movies(): Movie[] {
     if (this.repo.movies != null && this.repo.movies.length > 0) {
       let pageIndex =
-        (this.repo.pagination.currentPage - 1) * this.repo.pagination.moviesPerPage;
+        (this.repo.pagination.currentPage - 1) *
+        this.repo.pagination.moviesPerPage;
       return this.repo.movies.slice(
-                    pageIndex,
-                    pageIndex + this.repo.pagination.moviesPerPage
+        pageIndex,
+        pageIndex + this.repo.pagination.moviesPerPage
       );
     }
   }
 
-  addCart(movie: Movie){
+  addToCart(movie: Movie) {
     this.cart.addMovie(movie);
   }
 }

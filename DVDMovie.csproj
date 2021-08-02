@@ -26,6 +26,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,5 +63,14 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
+
+  <ItemGroup>
+   <TypeScriptCompile Include="ClientApp\src\app\models\cart.model.ts" />
+   <TypeScriptCompile Include="ClientApp\src\app\store\cartDetail.component.ts" />
+   <TypeScriptCompile Include="ClientApp\src\main.ts" />
+  </ItemGroup>
+  <ItemGroup>
+   <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
 
 </Project>

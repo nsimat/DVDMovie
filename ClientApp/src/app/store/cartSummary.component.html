@@ -1,13 +1,13 @@
 <div class="text-end p-1">
   <small *ngIf="itemCount > 0; else empty">
-    ({{ itemCount }} item(s) {{ totalPrice | currency: "EUR" }})
+    ({{ itemCount }} item(s) {{ totalPrice | currency:"EUR":"symbol" }})
   </small>
   <button
-    class="btn btn-secondary btn-sm ms-1"
+    class="btn btn-sm ms-1"
     [disabled]="itemCount == 0"
     routerLink="/cart"
   >
-    <i class="fas fa-shopping-cart"></i>
+    <i class="text-white fas fa-shopping-cart"></i>
   </button>
 </div>
 <ng-template #empty>
