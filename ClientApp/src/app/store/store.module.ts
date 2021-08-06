@@ -1,3 +1,7 @@
+import { OrderConfirmationComponent } from './checkout/orderConfirmation.component';
+import { CheckoutSummaryComponent } from './checkout/checkoutSummary.component';
+import { CheckoutPaymentComponent } from './checkout/checkoutPayment.component';
+import { CheckoutDetailsComponent } from './checkout/checkoutDetails.component';
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
@@ -18,7 +22,11 @@ import { RatingsComponent } from "./ratings.component";
     MovieSelectionComponent,
     PaginationComponent,
     RatingsComponent,
-    CartDetailComponent
+    CartDetailComponent,
+    CheckoutDetailsComponent,
+    CheckoutPaymentComponent,
+    CheckoutSummaryComponent,
+    OrderConfirmationComponent
   ],
   imports: [BrowserModule, FormsModule, RouterModule],
   exports: [MovieSelectionComponent],
