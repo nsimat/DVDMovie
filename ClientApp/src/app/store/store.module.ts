@@ -3,7 +3,7 @@ import { CheckoutSummaryComponent } from './checkout/checkoutSummary.component';
 import { CheckoutPaymentComponent } from './checkout/checkoutPayment.component';
 import { CheckoutDetailsComponent } from './checkout/checkoutDetails.component';
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { CartDetailComponent } from "./cartDetail.component";
@@ -28,7 +28,7 @@ import { RatingsComponent } from "./ratings.component";
     CheckoutSummaryComponent,
     OrderConfirmationComponent
   ],
-  imports: [BrowserModule, FormsModule, RouterModule],
+  imports: [BrowserModule, FormsModule, RouterModule, ReactiveFormsModule],
   exports: [MovieSelectionComponent],
 })
 export class StoreModule {}

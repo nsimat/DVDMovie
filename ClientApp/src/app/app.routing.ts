@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: "checkout/step1", component: CheckoutDetailsComponent},
   {path: "checkout/step2", component: CheckoutPaymentComponent},
   {path: "checkout/step3", component: CheckoutSummaryComponent},
+  {path: "checkout/confirmation", component: OrderConfirmationComponent},
   {path: "checkout", component: OrderConfirmationComponent},
   { path: "cart", component: CartDetailComponent },
   { path: "store", component: MovieSelectionComponent },
