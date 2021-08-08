@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using DVDMovie.Models;
 
-namespace DVDMovie.Controllers.BindingTargets
+namespace DVDMovie.Models.BindingTargets
 {
     public class MovieData
     {

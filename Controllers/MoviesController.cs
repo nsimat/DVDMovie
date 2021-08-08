@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DVDMovie.Models;
 using Microsoft.EntityFrameworkCore;
-using DVDMovie.Controllers.BindingTargets;
+using DVDMovie.Models.BindingTargets;
 using Microsoft.AspNetCore.JsonPatch;
 using System.Text.Json;
 using System.Reflection;

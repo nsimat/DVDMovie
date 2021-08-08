@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DVDMovie.Controllers.BindingTargets;
+using DVDMovie.Models.BindingTargets;
 using DVDMovie.Models;
 using Microsoft.AspNetCore.Mvc;
 

@@ -5,7 +5,7 @@
 <h2 class="text-center m-2">Order Confirmation</h2>
 
 <div class="container">
-  <table *ngIf="order.orderConfirmation; else nodata" class="table m-2">
+  <table *ngIf="order.orderConfirmation; else nodata" class="table table-strip m-2">
     <tr>
       <th>Order</th>
       <td>{{ order.orderConfirmation.orderId }}</td>
