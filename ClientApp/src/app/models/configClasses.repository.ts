@@ -3,7 +3,7 @@ export class Filter {
   search?: string;
   related: boolean = false;
 
-  rest() {
+  reset() {
     this.category = this.search = null;
     this.related = false;
   }

@@ -8,6 +8,7 @@ import { ModelModule } from './models/model.module';
 import { RoutingConfig } from './app.routing';
 import { StoreModule } from './store/store.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ModelModule,
     FormsModule,
     FontAwesomeModule,
-    StoreModule
+    StoreModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
