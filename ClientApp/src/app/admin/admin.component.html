@@ -7,29 +7,31 @@
 </div>
 
 <div class="row g-0">
-  <div class="d-grid gap-2 col-3">
-    <button
-      class="btn btn-outline-info btn-block"
-      routerLink="/admin"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      Overview
-    </button>
-    <button
-      class="btn btn-outline-info btn-block"
-      routerLink="/admin/movies"
-      routerLinkActive="active"
-    >
-      Movies
-    </button>
-    <button
-      class="btn btn-outline-info btn-block"
-      routerLink="/admin/orders"
-      routerLinkActive="active"
-    >
-      Orders
-    </button>
+  <div class="col-3">
+    <div class="d-grid gap-2">
+      <button
+        class="btn btn-outline-info"
+        routerLink="/admin"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Overview
+      </button>
+      <button
+        class="btn btn-outline-info"
+        routerLink="/admin/movies"
+        routerLinkActive="active"
+      >
+        Movies
+      </button>
+      <button
+        class="btn btn-outline-info"
+        routerLink="/admin/orders"
+        routerLinkActive="active"
+      >
+        Orders
+      </button>
+    </div>
   </div>
   <div class="col p-2">
     <router-outlet></router-outlet>
